@@ -1,3 +1,7 @@
+<?php
+
+namespace App\Http\Controllers;
+
 use App\Models\Resep;
 use Illuminate\Http\Request;
 

@@ -34,14 +34,14 @@
         </div>
 
         <div class="mb-3">
-            <label for="gambar" class="form-label">Ganti Gambar (opsional)</label><br>
+            <label for="gambar" class="form-label">Ganti Gambar</label><br>
             @if ($resep->gambar)
                 <img src="{{ asset('storage/' . $resep->gambar) }}" width="120" class="mb-2 d-block">
             @endif
             <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*">
         </div>
 
-        <button type="submit" class="btn btn-primary">Update Resep</button>
+        <button type="submit" class="btn btn-primary">Update</button>
         <a href="{{ route('reseps.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>

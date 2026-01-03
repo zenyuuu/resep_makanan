@@ -22,3 +22,6 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Do not commit environment-specific cached config
+bootstrap/cache/config.php

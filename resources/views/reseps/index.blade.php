@@ -2,55 +2,37 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mb-4">Daftar Resep Makanan</h1>
+    <h1 class="mb-4">Daftar Resep</h1>
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+    <a href="{{ route('reseps.create') }}" class="btn btn-primary mb-4">+ Tambah Resep</a>
 
-    <a href="{{ route('reseps.create') }}" class="btn btn-primary mb-3">+ Tambah Resep</a>
-
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead class="table-light">
-                <tr>
-                    <th>Judul</th>
-                    <th>Author</th>
-                    <th>Gambar</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($reseps as $resep)
-                    <tr>
-                        <td>{{ $resep->judul }}</td>
-                        <td>{{ $resep->user->name ?? 'Anonim' }}</td>
-                        <td>
-                            @if ($resep->gambar)
-                                <img src="{{ asset('storage/' . $resep->gambar) }}" width="100">
-                            @else
-                                Tidak ada
-                            @endif
-                        </td>
-                        <td>
-                            <a href="{{ route('reseps.show', $resep->id) }}" class="btn btn-info btn-sm">Lihat</a>
-                            <a href="{{ route('reseps.edit', $resep->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('reseps.destroy', $resep->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin hapus?')">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger btn-sm">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" class="text-center">Belum ada resep.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+    <div class="row">
+        @forelse ($reseps as $resep)
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    @if ($resep->gambar)
+                        <img src="{{ asset('storage/' . $resep->gambar) }}" class="card-img-top" alt="{{ $resep->judul }}">
+                    @else
+                        <img src="https://via.placeholder.com/300x200?text=No+Image" class="card-img-top" alt="Tidak ada gambar">
+                    @endif
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $resep->judul }}</h5>
+                        <p class="card-text"><small>Oleh: {{ $resep->user->name ?? 'Anonim' }}</small></p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{{ route('reseps.show', $resep->id) }}" class="btn btn-sm btn-info">Lihat</a>
+                        <a href="{{ route('reseps.edit', $resep->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                        <form action="{{ route('reseps.destroy', $resep->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin hapus?')">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-sm btn-danger">Hapus</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <p class="text-center">Belum ada resep yang ditambahkan.</p>
+        @endforelse
     </div>
 </div>
 @endsection
