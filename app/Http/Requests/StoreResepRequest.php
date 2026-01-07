@@ -11,11 +11,7 @@ class StoreResepRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // allow creation in local environment for debugging; otherwise require auth
-        if (app()->environment('local')) {
-            return true;
-        }
-
+        // only authenticated users may create reseps
         return $this->user() !== null;
     }
 

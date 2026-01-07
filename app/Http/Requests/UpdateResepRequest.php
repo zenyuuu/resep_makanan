@@ -11,11 +11,6 @@ class UpdateResepRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        // allow updates in local environment for debugging
-        if (app()->environment('local')) {
-            return true;
-        }
-
         // only owner can update — route model is available as 'resep'
         $resep = $this->route('resep');
 
