@@ -28,8 +28,8 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // After login, always redirect users to the named `home` route
-        return redirect()->route('home');
+        // After login, redirect users to the named `dashboard` route (preferred)
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**
