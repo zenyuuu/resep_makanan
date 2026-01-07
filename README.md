@@ -57,3 +57,44 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+---
+
+## Getting started (development)
+
+Follow these steps after cloning to run the app locally without surprises:
+
+1. Clone and install dependencies
+
+   git clone https://github.com/zenyuuu/resep_makanan.git
+   cd resep_makanan
+   composer install
+
+2. Copy the environment file and generate an app key
+
+   cp .env.example .env
+   php artisan key:generate
+
+3. Choose a database
+
+   - SQLite: uncomment `DB_CONNECTION=sqlite` and create `database/database.sqlite`.
+   - MySQL/Postgres: set `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` in `.env`.
+
+4. Run migrations and seeders
+
+   php artisan migrate --seed
+
+5. Link storage so uploaded images are public
+
+   php artisan storage:link
+
+6. Run the app and tests
+
+   php artisan serve
+   vendor/bin/pest
+
+Notes
+
+- Do not commit secrets. Keep `.env` out of version control (it is ignored by `.gitignore`).
+- If `composer install` fails due to memory limits, re-run with `COMPOSER_MEMORY_LIMIT=-1 composer install`.
+- CI uses SQLite for tests (see `.github/workflows/ci.yml`); no additional setup is required on GitHub Actions.
