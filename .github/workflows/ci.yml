@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, intl, bcmath, pcntl
+          ini-values: memory_limit=2G
+      - name: Validate composer
+        run: composer --version
+      - name: Composer diagnose
+        run: composer diagnose || true
+      - name: Install dependencies
+        env:
+          COMPOSER_MEMORY_LIMIT: -1
+        run: composer install --no-interaction --prefer-dist --no-progress --no-suggest
+      - name: Prepare .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: Prepare database (sqlite)
+        run: |
+          mkdir -p database
+          touch database/database.sqlite
+        # Ensure migrations use sqlite for CI to avoid depending on external DB
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+
+      - name: Run migrations
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+        run: php artisan migrate --force --no-interaction
+
+      - name: Run tests
+        run: vendor/bin/pest --colors=always --verbose
+
+      - name: Run static analysis (phpstan)
+        run: composer run-script lint
+        continue-on-error: false

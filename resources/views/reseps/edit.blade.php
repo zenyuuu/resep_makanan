@@ -36,7 +36,7 @@
         <div class="mb-3">
             <label for="gambar" class="form-label">Ganti Gambar</label><br>
             @if ($resep->gambar)
-                <img src="{{ asset('storage/' . $resep->gambar) }}" width="120" class="mb-2 d-block">
+                <img src="{{ Storage::url($resep->gambar) }}" width="120" class="mb-2 d-block">
             @endif
             <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*">
         </div>
