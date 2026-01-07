@@ -25,3 +25,9 @@ Thumbs.db
 
 # Do not commit environment-specific cached config
 bootstrap/cache/config.php
+
+# Local debugging artifacts
+cookies.txt
+create.html
+headers_create.txt
+login.html
