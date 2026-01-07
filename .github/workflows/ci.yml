@@ -19,8 +19,12 @@ jobs:
           ini-values: memory_limit=2G
       - name: Validate composer
         run: composer --version
+      - name: Composer diagnose
+        run: composer diagnose || true
       - name: Install dependencies
-        run: composer install --no-progress --no-suggest --prefer-dist
+        env:
+          COMPOSER_MEMORY_LIMIT: -1
+        run: composer install --no-interaction --prefer-dist --no-progress --no-suggest
       - name: Prepare .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
