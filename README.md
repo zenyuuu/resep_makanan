@@ -1,100 +1,346 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🍳 MauMasakApa - Recipe Sharing Platform
+
+Platform resep online modern untuk berbagi, mencari, dan menyimpan resep favorit dengan komunitas global.
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <strong>Built with Laravel | Modern UI | Full CRUD | Search Features</strong>
 </p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ---
 
-## Getting started (development)
+## 🎯 Fitur Utama
 
-Follow these steps after cloning to run the app locally without surprises:
+✅ **CRUD Recipes** - Create, Read, Update, Delete resep dengan mudah  
+✅ **User Authentication** - Login, Register, Logout dengan aman  
+✅ **Favorites System** - Simpan resep favorit dengan star button  
+✅ **Advanced Search** - Cari resep by nama & bahan-bahan  
+✅ **User Dashboard** - Dashboard dengan stats & menu navigasi  
+✅ **Image Upload** - Upload & manage gambar resep  
+✅ **Responsive Design** - Optimized untuk desktop & mobile  
+✅ **Authorization** - Hanya owner bisa edit/delete resep sendiri  
+✅ **Modern UI** - Yellow/Amber theme yang menarik  
+✅ **Pagination** - List resep dengan pagination  
 
-1. Clone and install dependencies
+---
 
-   git clone https://github.com/zenyuuu/resep_makanan.git
-   cd resep_makanan
-   composer install
+## 🛠️ Tech Stack
 
-2. Copy the environment file and generate an app key
+| Layer | Technology |
+|-------|-----------|
+| **Backend** | Laravel 10+ |
+| **Frontend** | Blade Templates + Custom CSS |
+| **Database** | MySQL/SQLite |
+| **Styling** | Vanilla CSS (Yellow Theme) |
+| **Build Tool** | Vite |
+| **Package Manager** | Composer + npm |
 
-   cp .env.example .env
-   php artisan key:generate
+---
 
-3. Choose a database
+## 📋 System Requirements
 
-   - SQLite: uncomment `DB_CONNECTION=sqlite` and create `database/database.sqlite`.
-   - MySQL/Postgres: set `DB_CONNECTION`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` in `.env`.
+- PHP 8.1 atau lebih tinggi
+- Composer
+- Node.js & npm
+- MySQL 5.7+ atau SQLite
+- Git
 
-4. Run migrations and seeders
+---
 
-   php artisan migrate --seed
+## 🚀 Quick Start
 
-5. Link storage so uploaded images are public
+### 1️⃣ Clone Repository
+```bash
+git clone https://github.com/zenyuuu/resep_makanan.git
+cd resep_makanan
+```
 
-   php artisan storage:link
+### 2️⃣ Install Dependencies
+```bash
+composer install
+npm install
+```
 
-6. Run the app and tests
+### 3️⃣ Setup Environment
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-   php artisan serve
-   vendor/bin/pest
+### 4️⃣ Database Setup
+```bash
+# Edit .env untuk set database connection
+# Kemudian jalankan:
+php artisan migrate
 
-Notes
+# (Optional) Seed dengan data dummy:
+php artisan db:seed
+```
 
-- Do not commit secrets. Keep `.env` out of version control (it is ignored by `.gitignore`).
-- If `composer install` fails due to memory limits, re-run with `COMPOSER_MEMORY_LIMIT=-1 composer install`.
-- CI uses SQLite for tests (see `.github/workflows/ci.yml`); no additional setup is required on GitHub Actions.
+### 5️⃣ Build Assets
+```bash
+npm run dev
+```
+
+### 6️⃣ Run Server
+```bash
+php artisan serve
+```
+
+Server running di: **http://127.0.0.1:8000**
+
+> **Untuk detail lengkap, baca [SETUP.md](SETUP.md)**
+
+---
+
+## 📁 Project Structure
+
+```
+resep_makanan/
+├── app/
+│   ├── Http/Controllers/ResepController.php      # Resep logic
+│   ├── Models/
+│   │   ├── User.php
+│   │   └── Resep.php
+│   └── Policies/ResepPolicy.php                  # Authorization
+├── database/
+│   ├── migrations/
+│   │   └── *_create_reseps_table.php
+│   └── seeders/
+│       └── ResepSeeder.php
+├── resources/
+│   ├── css/                    # Stylesheets
+│   │   ├── auth.css
+│   │   ├── home.css
+│   │   ├── dashboard.css
+│   │   ├── reseps.css
+│   │   └── profile.css
+│   ├── views/                  # Blade templates
+│   │   ├── reseps/
+│   │   │   ├── index.blade.php
+│   │   │   ├── create.blade.php
+│   │   │   ├── edit.blade.php
+│   │   │   ├── show.blade.php
+│   │   │   └── favorites.blade.php
+│   │   └── ...
+│   └── js/
+├── routes/
+│   ├── web.php                 # Web routes
+│   └── auth.php                # Auth routes
+├── storage/
+│   └── app/reseps/             # Upload resep images
+├── public/
+│   ├── css/                    # Compiled CSS
+│   └── storage/                # Symlink to storage
+└── tests/                      # Test files
+```
+
+---
+
+## 🔐 User Roles & Permissions
+
+| Action | Anonymous | User | Owner |
+|--------|-----------|------|-------|
+| View Resep | ✅ | ✅ | ✅ |
+| Create Resep | ❌ | ✅ | ✅ |
+| Edit Resep | ❌ | ❌ | ✅ |
+| Delete Resep | ❌ | ❌ | ✅ |
+| Add to Favorite | ❌ | ✅ | ✅ |
+| Search Resep | ✅ | ✅ | ✅ |
+
+---
+
+## 🎨 Design System
+
+### Colors
+- **Primary**: `#f59e0b` (Amber-500)
+- **Primary Dark**: `#d97706` (Amber-600)
+- **Accent**: `#fbbf24` (Amber-400)
+- **Light BG**: `#fef3c7` (Amber-100)
+
+### Typography
+- **Font**: Segoe UI, Tahoma, Geneva, Verdana, sans-serif
+- **Headings**: Bold (700-900 weight)
+- **Body**: Regular (400-600 weight)
+
+### Spacing
+- **Border Radius**: 12px - 20px
+- **Shadows**: 0 10px 40px rgba(0,0,0,0.1)
+- **Gaps**: 1.5rem - 3rem
+
+---
+
+## 🔄 Database Schema
+
+### Tabel: `reseps`
+```sql
+- id (PK)
+- user_id (FK) - Pembuat resep
+- judul (string) - Nama resep
+- bahan (text) - Daftar bahan
+- langkah (text) - Cara memasak
+- gambar (string) - Path gambar
+- created_at, updated_at
+```
+
+### Tabel: `favorites`
+```sql
+- user_id (PK)
+- resep_id (PK)
+- Relationship: Many-to-Many antara User & Resep
+```
+
+---
+
+## 📍 API Routes
+
+| Method | Route | Purpose |
+|--------|-------|---------|
+| GET | `/` | Landing page |
+| GET | `/home` | Home (authenticated) |
+| GET | `/dashboard` | User dashboard |
+| GET | `/reseps` | Daftar resep |
+| GET | `/reseps/create` | Form buat resep |
+| POST | `/reseps` | Store resep |
+| GET | `/reseps/{id}` | Detail resep |
+| GET | `/reseps/{id}/edit` | Form edit resep |
+| PUT | `/reseps/{id}` | Update resep |
+| DELETE | `/reseps/{id}` | Hapus resep |
+| POST | `/reseps/{id}/favorite` | Toggle favorite |
+| GET | `/favorites` | List favorit user |
+| GET | `/profile` | Profile user |
+
+---
+
+## 🧪 Testing
+
+```bash
+# Run semua tests
+php artisan test
+
+# Run specific test
+php artisan test tests/Feature/ResepCrudTest.php
+
+# With verbose
+php artisan test --verbose
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### "SQLSTATE[HY000]" Error
+```bash
+# Check database configuration di .env
+# Pastikan database sudah created
+php artisan migrate
+```
+
+### CSS Tidak Muncul
+```bash
+npm run dev
+npm run build  # untuk production
+php artisan cache:clear
+# Kemudian hard refresh di browser (Ctrl+Shift+R)
+```
+
+### Images Tidak Muncul
+```bash
+php artisan storage:link
+# Check folder storage/app/public/reseps
+```
+
+### Composer Error
+```bash
+composer install --no-dev  # untuk production
+composer update            # update dependencies
+```
+
+---
+
+## 📚 Documentation
+
+- [Setup Guide](SETUP.md) - Panduan instalasi detail
+- [Laravel Docs](https://laravel.com/docs) - Official Laravel documentation
+- [Database Migrations](database/migrations) - Schema definitions
+
+---
+
+## 🔄 Git Workflow
+
+```bash
+# Clone
+git clone <repo-url>
+
+# Create branch untuk fitur
+git checkout -b feature/nama-fitur
+
+# Commit changes
+git add .
+git commit -m "feat: Deskripsi singkat"
+
+# Push ke GitHub
+git push origin feature/nama-fitur
+
+# Create Pull Request di GitHub
+```
+
+---
+
+## 🚀 Deployment
+
+Untuk deploy ke production:
+
+```bash
+git clone <repo>
+cd resep_makanan
+composer install --no-dev
+npm install && npm run build
+cp .env.example .env
+# Setup .env dengan database production
+php artisan key:generate
+php artisan migrate --force
+php artisan storage:link
+```
+
+**Recommended Hosting:**
+- Heroku, Railway, Vercel (untuk PHP apps)
+- Shared Hosting dengan PHP 8.1+
+- VPS (Ubuntu/Debian)
+- Docker
+
+---
+
+## 📄 License
+
+MIT License - See LICENSE file for details
+
+---
+
+## 👥 Contributors
+
+- **mixxue** - Main Developer
+
+---
+
+## 💬 Support & Questions
+
+Jika ada pertanyaan atau error:
+1. Check [SETUP.md](SETUP.md) Troubleshooting section
+2. Lihat error message di terminal
+3. Check application logs: `storage/logs/laravel.log`
+4. Open issue di GitHub
+
+---
+
+## 🎉 Acknowledgments
+
+- Laravel Framework
+- Font Awesome Icons
+- Blade Templating Engine
+
+---
+
+<p align="center">
+  Made with ❤️ for food lovers<br>
+  <strong>MauMasakApa 2026</strong>
+</p>
