@@ -1,23 +1,23 @@
 <x-app-layout>
     <style>
-        .reseps-wrapper {
+        .favorites-wrapper {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: calc(100vh - 70px);
             padding: 40px 0;
         }
 
-        .reseps-header {
+        .favorites-header {
             margin-bottom: 40px;
             color: white;
         }
 
-        .reseps-header h2 {
+        .favorites-header h2 {
             font-size: 2.5rem;
             font-weight: 700;
             margin: 0 0 10px 0;
         }
 
-        .reseps-header p {
+        .favorites-header p {
             margin: 0;
             opacity: 0.9;
             font-size: 1rem;
@@ -63,7 +63,7 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .btn-tambah {
+        .btn-kembali-fav {
             background: white;
             color: #667eea;
             border: none;
@@ -76,23 +76,23 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .btn-tambah:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            color: #667eea;
             text-decoration: none;
         }
 
-        .reseps-grid {
+        .btn-kembali-fav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            color: #667eea;
+        }
+
+        .favorites-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
 
-        .resep-card {
+        .favorite-card {
             background: white;
             border-radius: 12px;
             overflow: hidden;
@@ -102,12 +102,12 @@
             flex-direction: column;
         }
 
-        .resep-card:hover {
+        .favorite-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
 
-        .resep-image {
+        .favorite-image {
             position: relative;
             width: 100%;
             height: 200px;
@@ -115,18 +115,18 @@
             background: #f0f0f0;
         }
 
-        .resep-image img {
+        .favorite-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
         }
 
-        .resep-card:hover .resep-image img {
+        .favorite-card:hover .favorite-image img {
             transform: scale(1.05);
         }
 
-        .star-favorite-btn {
+        .star-favorite-btn-list {
             position: absolute;
             top: 15px;
             right: 15px;
@@ -142,28 +142,19 @@
             z-index: 10;
         }
 
-        .star-favorite-btn:hover {
+        .star-favorite-btn-list:hover {
             transform: scale(1.2) rotate(20deg);
             filter: brightness(1.2);
         }
 
-        .star-favorite-btn.empty {
-            color: rgba(255, 255, 255, 0.7);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .star-favorite-btn.empty:hover {
-            color: #ffd700;
-        }
-
-        .resep-content {
+        .favorite-content {
             padding: 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
 
-        .resep-title {
+        .favorite-title {
             font-size: 1.1rem;
             font-weight: 700;
             color: #333;
@@ -171,7 +162,7 @@
             line-height: 1.4;
         }
 
-        .resep-author {
+        .favorite-author {
             font-size: 0.85rem;
             color: #999;
             margin: 0 0 12px 0;
@@ -180,11 +171,11 @@
             gap: 6px;
         }
 
-        .resep-author i {
+        .favorite-author i {
             color: #667eea;
         }
 
-        .resep-description {
+        .favorite-description {
             font-size: 0.85rem;
             color: #666;
             line-height: 1.5;
@@ -192,7 +183,7 @@
             flex: 1;
         }
 
-        .resep-actions {
+        .favorite-actions {
             display: flex;
             gap: 8px;
             margin-top: auto;
@@ -265,76 +256,78 @@
             font-weight: 600;
         }
 
+        .empty-state a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
         .pagination {
             justify-content: center;
             margin-top: 40px;
         }
     </style>
 
-    <div class="reseps-wrapper">
+    <div class="favorites-wrapper">
         <div class="container">
             <!-- Header -->
-            <div class="reseps-header d-flex justify-content-between align-items-start mb-4">
+            <div class="favorites-header d-flex justify-content-between align-items-start mb-4">
                 <div>
-                    <h2><i class="fas fa-utensils"></i> Daftar Resep</h2>
-                    <p>Jelajahi koleksi resep lezat dari komunitas kami</p>
+                    <h2><i class="fas fa-star"></i> Resep Favorit Saya</h2>
+                    <p>Koleksi resep pilihan Anda</p>
                 </div>
-                @auth
-                    <a href="{{ route('reseps.create') }}" class="btn-tambah">
-                        <i class="fas fa-plus-circle"></i> Tambah Resep
-                    </a>
-                @endauth
+                <a href="{{ route('reseps.index') }}" class="btn-kembali-fav">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </a>
             </div>
 
             <!-- Search -->
             <div class="search-wrapper">
-                <form action="{{ route('reseps.index') }}" method="GET">
-                    <input type="text" name="search" placeholder="Cari resep berdasarkan nama..." value="{{ request('search') }}">
+                <form action="{{ route('reseps.favorites') }}" method="GET">
+                    <input type="text" name="search" placeholder="Cari resep favorit..." value="{{ request('search') }}">
                     <button type="submit" class="btn-search">
                         <i class="fas fa-search"></i> Cari
                     </button>
                 </form>
             </div>
 
-            <!-- Reseps Grid -->
-            <div class="reseps-grid">
-                @forelse ($reseps as $resep)
-                    <div class="resep-card">
+            <!-- Favorites Grid -->
+            <div class="favorites-grid">
+                @forelse ($favorites as $resep)
+                    <div class="favorite-card">
                         <!-- Image -->
-                        <div class="resep-image">
+                        <div class="favorite-image">
                             @if ($resep->gambar)
                                 <img src="{{ Storage::url($resep->gambar) }}" alt="{{ $resep->judul }}">
                             @else
                                 <img src="https://via.placeholder.com/300x200?text=No+Image" alt="Tidak ada gambar">
                             @endif
 
-                            <!-- Favorite Star -->
-                            @auth
-                                <form action="{{ route('reseps.favorite', $resep) }}" method="POST" class="d-inline" style="position: absolute; top: 0; right: 0;">
-                                    @csrf
-                                    <button type="submit" class="star-favorite-btn {{ $resep->isFavoritedBy(auth()->user()) ? '' : 'empty' }}" title="{{ $resep->isFavoritedBy(auth()->user()) ? 'Hapus dari favorit' : 'Tambah ke favorit' }}">
-                                        <i class="fas fa-star"></i>
-                                    </button>
-                                </form>
-                            @endauth
+                            <!-- Remove Favorite Button -->
+                            <form action="{{ route('reseps.favorite', $resep) }}" method="POST" class="d-inline" style="position: absolute; top: 0; right: 0;">
+                                @csrf
+                                <button type="submit" class="star-favorite-btn-list" title="Hapus dari favorit">
+                                    <i class="fas fa-star"></i>
+                                </button>
+                            </form>
                         </div>
 
                         <!-- Content -->
-                        <div class="resep-content">
-                            <h3 class="resep-title">{{ $resep->judul }}</h3>
+                        <div class="favorite-content">
+                            <h3 class="favorite-title">{{ $resep->judul }}</h3>
                             
-                            <p class="resep-author">
+                            <p class="favorite-author">
                                 <i class="fas fa-user-circle"></i>
                                 {{ $resep->user->name ?? 'Anonim' }}
                             </p>
 
-                            <p class="resep-description">
+                            <p class="favorite-description">
                                 <i class="fas fa-list" style="color: #667eea;"></i>
                                 {{ Illuminate\Support\Str::limit($resep->bahan, 100) }}
                             </p>
 
                             <!-- Actions -->
-                            <div class="resep-actions">
+                            <div class="favorite-actions">
                                 <a href="{{ route('reseps.show', $resep) }}" class="action-btn btn-lihat">
                                     <i class="fas fa-eye"></i> Lihat
                                 </a>
@@ -360,9 +353,12 @@
                 @empty
                     <div style="grid-column: 1 / -1;">
                         <div class="empty-state">
-                            <i class="fas fa-inbox"></i>
-                            <h3>Belum ada resep</h3>
-                            <p style="color: #999; margin-top: 10px;">Mulai dengan membuat resep pertama Anda atau cari resep dari pengguna lain</p>
+                            <i class="fas fa-star"></i>
+                            <h3>Belum ada resep favorit</h3>
+                            <p style="color: #999; margin-top: 10px;">
+                                Mulai dengan menambahkan resep favorit Anda atau 
+                                <a href="{{ route('reseps.index') }}">lihat semua resep</a>
+                            </p>
                         </div>
                     </div>
                 @endforelse
@@ -370,7 +366,7 @@
 
             <!-- Pagination -->
             <div class="pagination">
-                {{ $reseps->links() }}
+                {{ $favorites->links() }}
             </div>
         </div>
     </div>

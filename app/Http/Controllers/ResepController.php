@@ -112,4 +112,19 @@ class ResepController extends Controller
 
         return back()->with('success', $message);
     }
+
+    public function favorites(Request $request)
+    {
+        $user = auth()->user();
+        $search = $request->query('search');
+
+        $favorites = $user->favorites()
+            ->when($search, function ($query, $search) {
+                return $query->where('judul', 'like', "%{$search}%")
+                             ->orWhere('bahan', 'like', "%{$search}%");
+            })
+            ->paginate(12);
+
+        return view('reseps.favorites', compact('favorites'));
+    }
 }

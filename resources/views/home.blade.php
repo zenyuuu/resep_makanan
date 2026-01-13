@@ -1,41 +1,231 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-gradient-to-r from-indigo-600 to-pink-500 text-white py-20">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-        <h1 class="text-4xl font-extrabold mb-4">Selamat Datang di <span class="underline decoration-white/30">Resep Makanan</span></h1>
-        <p class="text-lg mb-6">Temukan dan bagikan resep makanan favoritmu!</p>
+<link rel="stylesheet" href="{{ asset('css/home.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        <div class="flex justify-center gap-4">
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-content">
+        <h1>Selamat Datang di <span class="highlight">MauMasakApa</span></h1>
+        <p>Jelajahi koleksi resep lezat, berbagi kreasi Anda, dan temukan inspirasi kuliner dari seluruh dunia!</p>
+        <div class="hero-buttons">
             @guest
-                <a href="{{ route('login') }}" class="px-5 py-3 bg-white text-indigo-600 rounded-lg font-semibold shadow hover:opacity-90">Login</a>
-                <a href="{{ route('register') }}" class="px-5 py-3 bg-white/20 border border-white/30 text-white rounded-lg font-semibold hover:bg-white/10">Register</a>
+                <a href="{{ route('login') }}" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Login Sekarang
+                </a>
+                <a href="{{ route('register') }}" class="btn btn-secondary">
+                    <i class="fas fa-user-plus"></i> Daftar Gratis
+                </a>
             @endguest
 
             @auth
-                <a href="{{ route('reseps.index') }}" class="px-5 py-3 bg-white text-indigo-600 rounded-lg font-semibold shadow hover:opacity-90">Lihat Semua Resep</a>
+                <a href="{{ route('reseps.index') }}" class="btn btn-primary">
+                    <i class="fas fa-book"></i> Jelajahi Resep
+                </a>
+                <a href="{{ route('reseps.create') }}" class="btn btn-secondary">
+                    <i class="fas fa-plus"></i> Buat Resep Baru
+                </a>
             @endauth
         </div>
     </div>
-</div>
+</section>
 
-<div class="max-w-6xl mx-auto px-4 py-12">
-    <div class="grid md:grid-cols-3 gap-6">
-        <div class="p-6 bg-white rounded-lg shadow">
-            <h3 class="text-xl font-semibold mb-2">Cari Resep</h3>
-            <p class="text-sm text-gray-600">Jelajahi koleksi resep berdasarkan kategori, bahan, atau nama masakan.</p>
+<!-- Features Section -->
+<section class="features-section">
+    <div class="section-title">
+        <h2>Mengapa Memilih Kami?</h2>
+        <p>Fitur lengkap untuk memaksimalkan pengalaman memasak Anda</p>
+    </div>
+
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🔍</div>
+            <h3>Cari Resep Mudah</h3>
+            <p>Temukan ribuan resep berdasarkan bahan, waktu, atau kesulitan memasak. Pencarian cepat dan akurat.</p>
         </div>
 
-        <div class="p-6 bg-white rounded-lg shadow">
-            <h3 class="text-xl font-semibold mb-2">Bagikan Kreasi</h3>
-            <p class="text-sm text-gray-600">Tambahkan resepmu sendiri dan bantu komunitas menemukan masakan baru.</p>
+        <div class="feature-card">
+            <div class="feature-icon">✍️</div>
+            <h3>Bagikan Kreasi</h3>
+            <p>Tambahkan resep favorit Anda dan bagikan dengan komunitas global. Bangun reputasi sebagai chef!</p>
         </div>
 
-        <div class="p-6 bg-white rounded-lg shadow">
-            <h3 class="text-xl font-semibold mb-2">Simpan Favorit</h3>
-            <p class="text-sm text-gray-600">Simpan resep favorit untuk akses cepat kapan saja.</p>
+        <div class="feature-card">
+            <div class="feature-icon">❤️</div>
+            <h3>Simpan Favorit</h3>
+            <p>Tandai resep favorit untuk akses instan. Kelola koleksi pribadi Anda dengan mudah.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">👥</div>
+            <h3>Komunitas Aktif</h3>
+            <p>Terhubung dengan chef lain, berbagi tips, dan belajar teknik memasak baru bersama.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Akses Dimana Saja</h3>
+            <p>Akses resep Anda di smartphone, tablet, atau desktop. Sinkronisasi otomatis di semua perangkat.</p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🎓</div>
+            <h3>Tips & Panduan</h3>
+            <p>Pelajari teknik memasak profesional dan tips ahli untuk hasil sempurna setiap kali.</p>
         </div>
     </div>
-</div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-number">{{ \App\Models\Resep::count() ?? 0 }}</div>
+            <div class="stat-label">Resep Tersedia</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">{{ \App\Models\User::count() ?? 0 }}</div>
+            <div class="stat-label">Chef Terdaftar</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">5★</div>
+            <div class="stat-label">Rating Kepuasan</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Dukungan</div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories Section -->
+@if(\App\Models\Resep::count() > 0)
+<section class="categories-section">
+    <div class="section-title">
+        <h2>Kategori Populer</h2>
+        <p>Jelajahi resep berdasarkan jenis makanan favorit Anda</p>
+    </div>
+
+    <div class="categories-grid">
+        <div class="category-item">
+            <div class="category-icon">🍜</div>
+            <div class="category-name">Mie & Pasta</div>
+        </div>
+        <div class="category-item">
+            <div class="category-icon">🍲</div>
+            <div class="category-name">Sup & Kuah</div>
+        </div>
+        <div class="category-item">
+            <div class="category-icon">🍗</div>
+            <div class="category-name">Ayam</div>
+        </div>
+        <div class="category-item">
+            <div class="category-icon">🥘</div>
+            <div class="category-name">Tumisan</div>
+        </div>
+        <div class="category-item">
+            <div class="category-icon">🍛</div>
+            <div class="category-name">Kari</div>
+        </div>
+        <div class="category-item">
+            <div class="category-icon">🥗</div>
+            <div class="category-name">Salad</div>
+        </div>
+        <div class="category-item">
+            <div class="category-icon">🍪</div>
+            <div class="category-name">Kue</div>
+        </div>
+        <div class="category-item">
+            <div class="category-icon">🍱</div>
+            <div class="category-name">Makanan Cepat</div>
+        </div>
+    </div>
+</section>
+@endif
+
+<!-- Popular Recipes Section -->
+@php
+    $latestRecipes = \App\Models\Resep::latest()->limit(6)->get();
+@endphp
+
+@if($latestRecipes->count() > 0)
+<section class="recipes-section">
+    <div class="section-title">
+        <h2>Resep Terbaru</h2>
+        <p>Koleksi resep segar yang baru ditambahkan oleh komunitas kami</p>
+    </div>
+
+    <div class="recipes-grid">
+        @foreach($latestRecipes as $resep)
+            <div class="recipe-card">
+                @if($resep->gambar)
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($resep->gambar) }}" alt="{{ $resep->judul }}" class="recipe-image">
+                @else
+                    <div class="recipe-image" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        <i class="fas fa-utensils" style="font-size: 3rem;"></i>
+                    </div>
+                @endif
+
+                <div class="recipe-content">
+                    <h3 class="recipe-title">{{ Illuminate\Support\Str::limit($resep->judul, 50) }}</h3>
+                    <p class="recipe-author">
+                        <i class="fas fa-user-circle"></i> {{ $resep->user->name ?? 'Anonim' }}
+                    </p>
+                    <p class="recipe-desc">{{ Illuminate\Support\Str::limit($resep->bahan, 80) }}</p>
+                    <div class="recipe-footer">
+                        <a href="{{ route('reseps.show', $resep) }}" class="recipe-link">
+                            <span>Lihat Resep</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <span class="recipe-badge">Baru</span>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+    @guest
+    @else
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="{{ route('reseps.index') }}" class="btn btn-primary">
+                <i class="fas fa-eye"></i> Lihat Semua Resep
+            </a>
+        </div>
+    @endguest
+</section>
+@endif
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="cta-content">
+        <h2>Siap untuk Mulai Memasak?</h2>
+        <p>Bergabunglah dengan ribuan pengguna yang telah menemukan resep impian mereka di platform kami.</p>
+        <div class="cta-buttons">
+            @guest
+                <a href="{{ route('register') }}" class="btn-cta btn-cta-primary">
+                    <i class="fas fa-user-plus"></i> Daftar Sekarang
+                </a>
+                <a href="{{ route('login') }}" class="btn-cta btn-cta-secondary">
+                    <i class="fas fa-sign-in-alt"></i> Sudah Punya Akun? Login
+                </a>
+            @endguest
+
+            @auth
+                <a href="{{ route('reseps.create') }}" class="btn-cta btn-cta-primary">
+                    <i class="fas fa-plus-circle"></i> Buat Resep Sekarang
+                </a>
+                <a href="{{ route('reseps.favorites') }}" class="btn-cta btn-cta-secondary">
+                    <i class="fas fa-heart"></i> Lihat Favorit Saya
+                </a>
+            @endauth
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="home-footer">
+    <p>&copy; 2026 MauMasakApa. Dibuat dengan ❤️ untuk pecinta kuliner. Semua hak dilindungi.</p>
+</footer>
 
 @endsection

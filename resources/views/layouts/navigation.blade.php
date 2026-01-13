@@ -15,6 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('reseps.index')" :active="request()->routeIs('reseps.*')">
+                        {{ __('Daftar Resep') }}
+                    </x-nav-link>
+                    @auth
+                        <x-nav-link :href="route('reseps.favorites')" :active="request()->routeIs('reseps.favorites')">
+                            <i class="fas fa-heart"></i> {{ __('Favorit Saya') }}
+                        </x-nav-link>
+                    @endauth
                 </div>
             </div>
 
@@ -70,6 +78,14 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('reseps.index')" :active="request()->routeIs('reseps.*')">
+                {{ __('Daftar Resep') }}
+            </x-responsive-nav-link>
+            @auth
+                <x-responsive-nav-link :href="route('reseps.favorites')" :active="request()->routeIs('reseps.favorites')">
+                    <i class="fas fa-heart"></i> {{ __('Favorit Saya') }}
+                </x-responsive-nav-link>
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->

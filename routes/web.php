@@ -22,5 +22,6 @@ Route::middleware('auth')->group(function () {
 Route::resource('reseps', App\Http\Controllers\ResepController::class);
 Route::post('/reseps/{resep}/favorite', [App\Http\Controllers\ResepController::class, 'favorite'])->name('reseps.favorite')->middleware('auth');
 Route::get('/reseps', [ResepController::class, 'index'])->name('reseps.index');
+Route::get('/favorites', [ResepController::class, 'favorites'])->name('reseps.favorites')->middleware('auth');
 
 require __DIR__.'/auth.php';
