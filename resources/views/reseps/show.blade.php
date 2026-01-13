@@ -3,7 +3,7 @@
 @section('content')
 <style>
     .show-resep-wrapper {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
         min-height: calc(100vh - 70px);
         padding: 40px 0;
     }
@@ -38,7 +38,7 @@
     }
 
     .resep-meta i {
-        color: #667eea;
+        color: #f59e0b;
         font-size: 1.1rem;
     }
 
@@ -83,12 +83,12 @@
         color: #333;
         margin: 0 0 20px 0;
         padding-bottom: 15px;
-        border-bottom: 2px solid #667eea;
+        border-bottom: 2px solid #f59e0b;
     }
 
     .section-title i {
         margin-right: 10px;
-        color: #667eea;
+        color: #f59e0b;
         font-size: 1.4rem;
     }
 
@@ -216,7 +216,7 @@
             <h1 class="resep-title">{{ $resep->judul }}</h1>
             <div class="resep-meta">
                 <i class="fas fa-user-circle"></i>
-                <span>Ditambahkan oleh <strong>{{ $resep->user->name ?? 'Anonim' }}</strong></span>
+                <span>Ditambahkan oleh <strong>{{ $resep->user?->name ?? 'Anonim' }}</strong></span>
             </div>
         </div>
 

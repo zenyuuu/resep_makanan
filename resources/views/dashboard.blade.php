@@ -19,7 +19,7 @@
                         <span>Daftar Resep</span>
                     </button>
                     <button type="button" onclick="window.location='{{ route('reseps.favorites') }}'" class="sidebar-nav-item">
-                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-star"></i>
                         <span>Favorit Saya</span>
                     </button>
                     <button type="button" onclick="window.location='{{ route('reseps.create') }}'" class="sidebar-nav-item">
@@ -93,8 +93,8 @@
 
                     <!-- Card 2: My Favorites -->
                     <div class="card">
-                        <div class="card-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                            <i class="fas fa-heart"></i>
+                        <div class="card-icon" style="background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);">
+                            <i class="fas fa-star"></i>
                         </div>
                         <h3>Favorit Saya</h3>
                         <p>Kumpulkan resep-resep favorit Anda dari seluruh koleksi yang tersedia.</p>
@@ -103,7 +103,7 @@
                                 <span>Lihat Favorit</span>
                                 <i class="fas fa-arrow-right"></i>
                             </a>
-                            <span class="card-badge" style="background: #f5576c;">{{ auth()->user()->favorites()->count() ?? 0 }}</span>
+                            <span class="card-badge" style="background: #ffd700; color: #333;">{{ auth()->user()->favorites()->count() ?? 0 }}</span>
                         </div>
                     </div>
 

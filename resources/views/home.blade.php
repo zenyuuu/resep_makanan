@@ -145,11 +145,7 @@
 @endif
 
 <!-- Popular Recipes Section -->
-@php
-    $latestRecipes = \App\Models\Resep::latest()->limit(6)->get();
-@endphp
-
-@if($latestRecipes->count() > 0)
+@if(isset($latestRecipes) && $latestRecipes->count() > 0)
 <section class="recipes-section">
     <div class="section-title">
         <h2>Resep Terbaru</h2>
@@ -162,7 +158,7 @@
                 @if($resep->gambar)
                     <img src="{{ \Illuminate\Support\Facades\Storage::url($resep->gambar) }}" alt="{{ $resep->judul }}" class="recipe-image">
                 @else
-                    <div class="recipe-image" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <div class="recipe-image" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white;">
                         <i class="fas fa-utensils" style="font-size: 3rem;"></i>
                     </div>
                 @endif
@@ -170,7 +166,7 @@
                 <div class="recipe-content">
                     <h3 class="recipe-title">{{ Illuminate\Support\Str::limit($resep->judul, 50) }}</h3>
                     <p class="recipe-author">
-                        <i class="fas fa-user-circle"></i> {{ $resep->user->name ?? 'Anonim' }}
+                        <i class="fas fa-user-circle"></i> {{ $resep->user?->name ?? 'Anonim' }}
                     </p>
                     <p class="recipe-desc">{{ Illuminate\Support\Str::limit($resep->bahan, 80) }}</p>
                     <div class="recipe-footer">
@@ -216,7 +212,7 @@
                     <i class="fas fa-plus-circle"></i> Buat Resep Sekarang
                 </a>
                 <a href="{{ route('reseps.favorites') }}" class="btn-cta btn-cta-secondary">
-                    <i class="fas fa-heart"></i> Lihat Favorit Saya
+                    <i class="fas fa-star"></i> Lihat Favorit Saya
                 </a>
             @endauth
         </div>

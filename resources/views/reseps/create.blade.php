@@ -3,7 +3,7 @@
 @section('content')
 <style>
     .create-resep-wrapper {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
         min-height: calc(100vh - 70px);
         padding: 40px 0;
     }
@@ -18,7 +18,7 @@
     }
 
     .create-resep-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
         color: white;
         padding: 40px 30px;
         text-align: center;
@@ -56,7 +56,7 @@
 
     .form-group-wrapper label i {
         margin-right: 8px;
-        color: #667eea;
+        color: #f59e0b;
         width: 18px;
     }
 
@@ -72,8 +72,8 @@
 
     .form-group-wrapper input:focus,
     .form-group-wrapper textarea:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        border-color: #f59e0b;
+        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
         outline: none;
     }
 
@@ -99,21 +99,21 @@
         align-items: center;
         justify-content: center;
         padding: 30px;
-        border: 2px dashed #667eea;
+        border: 2px dashed #f59e0b;
         border-radius: 8px;
-        background: #f8f9ff;
+        background: #fffbeb;
         cursor: pointer;
         transition: all 0.3s ease;
     }
 
     .file-upload-label:hover {
-        background: #f0f1ff;
-        border-color: #764ba2;
+        background: #fef3c7;
+        border-color: #d97706;
     }
 
     .file-upload-label i {
         margin-right: 10px;
-        color: #667eea;
+        color: #f59e0b;
         font-size: 1.5rem;
     }
 
@@ -143,7 +143,7 @@
 
     .btn-submit {
         flex: 1;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
         color: white;
         border: none;
         padding: 12px 30px;
@@ -160,7 +160,7 @@
 
     .btn-submit:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
         color: white;
         text-decoration: none;
     }

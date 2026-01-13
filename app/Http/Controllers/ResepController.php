@@ -14,7 +14,7 @@ class ResepController extends Controller
     {
         $search = $request->query('search');
 
-        $reseps = Resep::when($search, function ($query, $search) {
+        $reseps = Resep::with('user')->when($search, function ($query, $search) {
             return $query->where('judul', 'like', "%{$search}%")
                          ->orWhere('bahan', 'like', "%{$search}%");
         })->paginate(12);
@@ -119,6 +119,7 @@ class ResepController extends Controller
         $search = $request->query('search');
 
         $favorites = $user->favorites()
+            ->with('user')
             ->when($search, function ($query, $search) {
                 return $query->where('judul', 'like', "%{$search}%")
                              ->orWhere('bahan', 'like', "%{$search}%");

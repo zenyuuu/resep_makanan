@@ -4,10 +4,17 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResepController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
+use App\Models\Resep;
 
 Route::get('/', function () : View {
-    return view('welcome');
+    $latestRecipes = Resep::with('user')->latest()->take(6)->get();
+    return view('welcome', compact('latestRecipes'));
 })->name('home');
+
+Route::get('/home', function () : View {
+    $latestRecipes = Resep::with('user')->latest()->take(6)->get();
+    return view('home', compact('latestRecipes'));
+})->middleware(['auth', 'verified']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

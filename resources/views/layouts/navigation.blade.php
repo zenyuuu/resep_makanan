@@ -20,7 +20,7 @@
                     </x-nav-link>
                     @auth
                         <x-nav-link :href="route('reseps.favorites')" :active="request()->routeIs('reseps.favorites')">
-                            <i class="fas fa-heart"></i> {{ __('Favorit Saya') }}
+                            <i class="fas fa-star"></i> {{ __('Favorit Saya') }}
                         </x-nav-link>
                     @endauth
                 </div>
@@ -83,7 +83,7 @@
             </x-responsive-nav-link>
             @auth
                 <x-responsive-nav-link :href="route('reseps.favorites')" :active="request()->routeIs('reseps.favorites')">
-                    <i class="fas fa-heart"></i> {{ __('Favorit Saya') }}
+                    <i class="fas fa-star"></i> {{ __('Favorit Saya') }}
                 </x-responsive-nav-link>
             @endauth
         </div>

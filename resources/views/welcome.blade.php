@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
     <style>
         .welcome-nav {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
@@ -48,7 +48,7 @@
 
         .welcome-nav .btn-login {
             background: white;
-            color: #667eea;
+            color: #f59e0b;
             padding: 0.6rem 1.2rem;
             border-radius: 6px;
         }
@@ -193,15 +193,15 @@
         <div style="max-width: 1000px; margin: 0 auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);">
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
                 <div>
-                    <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem;">🎯 Misi Kami</h3>
+                    <h3 style="color: #f59e0b; font-size: 1.3rem; margin-bottom: 1rem;">🎯 Misi Kami</h3>
                     <p style="color: #666; line-height: 1.6;">Memberdayakan setiap orang untuk memasak makanan lezat dan sehat dengan menyediakan akses ke resep berkualitas tinggi dan komunitas yang mendukung.</p>
                 </div>
                 <div>
-                    <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem;">🌟 Visi Kami</h3>
+                    <h3 style="color: #f59e0b; font-size: 1.3rem; margin-bottom: 1rem;">🌟 Visi Kami</h3>
                     <p style="color: #666; line-height: 1.6;">Menjadi platform resep terpercaya di Asia dengan teknologi terdepan dan komunitas pengguna terbesar yang saling berbagi passion kuliner.</p>
                 </div>
                 <div>
-                    <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem;">💪 Komitmen Kami</h3>
+                    <h3 style="color: #f59e0b; font-size: 1.3rem; margin-bottom: 1rem;">💪 Komitmen Kami</h3>
                     <p style="color: #666; line-height: 1.6;">Terus berinovasi dan memberikan pengalaman terbaik kepada pengguna dengan dukungan customer yang responsif dan fitur yang user-friendly.</p>
                 </div>
             </div>
