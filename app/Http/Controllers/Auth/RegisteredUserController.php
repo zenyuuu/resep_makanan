@@ -45,7 +45,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        // After registration, redirect user to `dashboard`
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect(route('dashboard', absolute: false));
     }
 }

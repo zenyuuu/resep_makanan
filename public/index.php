@@ -19,4 +19,4 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 // Handle HTTP request & response
 $response = $app->handle(Request::capture());
 $response->send();
-$app->terminate(Request::capture(), $response);
+$app->terminate();

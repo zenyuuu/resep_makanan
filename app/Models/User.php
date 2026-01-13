@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Resep::class, 'favorites', 'user_id', 'resep_id')->withTimestamps();
+    }
 }

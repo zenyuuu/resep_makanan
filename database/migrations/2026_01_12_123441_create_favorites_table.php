@@ -1,0 +1,24 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    public function up(): void
+    {
+        Schema::create('favorites', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('resep_id')->constrained('reseps')->onDelete('cascade'); // Asumsi tabel resep namanya 'reseps'
+            $table->timestamps();
+
+            $table->unique(['user_id', 'resep_id']); // Hindari duplikat favorite
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('favorites');
+    }
+};
