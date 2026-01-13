@@ -153,6 +153,57 @@
         margin-bottom: 5px;
     }
 
+    /* Image Upload Success Indicator */
+    .image-preview-container {
+        margin-top: 15px;
+        display: none;
+        text-align: center;
+    }
+
+    .image-preview-container.show {
+        display: block;
+    }
+
+    .image-preview-container img {
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border: 2px solid #10b981;
+    }
+
+    .upload-success-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-top: 10px;
+        display: none;
+    }
+
+    .upload-success-badge.show {
+        display: inline-block;
+    }
+
+    .upload-success-badge i {
+        margin-right: 5px;
+    }
+
+    .file-name-display {
+        color: #10b981;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-top: 8px;
+        display: none;
+    }
+
+    .file-name-display.show {
+        display: block;
+    }
+
     .form-actions {
         display: flex;
         gap: 12px;
@@ -276,6 +327,14 @@
                             <span>Pilih gambar atau drag & drop</span>
                         </label>
                     </div>
+                    <!-- Image Preview -->
+                    <div class="image-preview-container" id="imagePreviewContainer">
+                        <img id="imagePreview" alt="Preview">
+                        <div class="file-name-display" id="fileNameDisplay"></div>
+                        <div class="upload-success-badge" id="successBadge">
+                            <i class="fas fa-check-circle"></i> Gambar berhasil dipilih
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Buttons -->
@@ -291,4 +350,63 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Image Upload Preview Handler
+    const fileInput = document.getElementById('gambar');
+    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+    const imagePreview = document.getElementById('imagePreview');
+    const successBadge = document.getElementById('successBadge');
+    const fileNameDisplay = document.getElementById('fileNameDisplay');
+
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            
+            reader.onload = function(event) {
+                imagePreview.src = event.target.result;
+                fileNameDisplay.textContent = '📄 ' + file.name + ' (' + (file.size / 1024).toFixed(2) + ' KB)';
+                imagePreviewContainer.classList.add('show');
+                successBadge.classList.add('show');
+                fileNameDisplay.classList.add('show');
+            };
+            
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Success Toast after Form Submission
+    @if (session('success'))
+        showSuccessToast('{{ session('success') }}');
+    @endif
+
+    function showSuccessToast(message) {
+        const toast = document.createElement('div');
+        toast.innerHTML = `
+            <div style="position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 16px 24px; border-radius: 8px; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3); z-index: 9999; display: flex; align-items: center; gap: 12px; animation: slideIn 0.3s ease;">
+                <i class="fas fa-check-circle" style="font-size: 1.2rem;"></i>
+                <span style="font-weight: 600;">${message}</span>
+            </div>
+            <style>
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(400px);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+            </style>
+        `;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
+</script>
 @endsection
