@@ -10,22 +10,26 @@ use Illuminate\Support\Facades\Storage;
 
 class ResepController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // paginate to avoid loading all records at once and support pagination UI
-        $reseps = Resep::latest()->with('user')->paginate(9);
+        $search = $request->query('search');
+
+        $reseps = Resep::when($search, function ($query, $search) {
+            return $query->where('judul', 'like', "%{$search}%")
+                         ->orWhere('bahan', 'like', "%{$search}%");
+        })->paginate(12);
+
         return view('reseps.index', compact('reseps'));
     }
 
     public function create()
     {
-        // store route is protected by auth middleware and StoreResepRequest
         return view('reseps.create');
     }
 
     public function store(StoreResepRequest $request)
     {
-        $data = $request->validated();
+        $data = $request->validated();  // Sudah include 'langkah' dari Form Request
 
         if ($request->hasFile('gambar')) {
             $data['gambar'] = $request->file('gambar')->store('reseps', 'public');
@@ -66,8 +70,7 @@ class ResepController extends Controller
 
     public function update(UpdateResepRequest $request, Resep $resep)
     {
-        // UpdateResepRequest authorize() already ensures owner
-        $data = $request->validated();
+        $data = $request->validated();  // Sudah include 'langkah' jika diubah
 
         if ($request->hasFile('gambar')) {
             // delete old gambar if exists
@@ -93,5 +96,20 @@ class ResepController extends Controller
 
         $resep->delete();
         return redirect()->route('reseps.index')->with('success', 'Resep berhasil dihapus');
+    }
+
+    public function favorite(Resep $resep)
+    {
+        $user = auth()->user();
+
+        if ($resep->isFavoritedBy($user)) {
+            $user->favorites()->detach($resep);
+            $message = 'Resep dihapus dari favorite.';
+        } else {
+            $user->favorites()->attach($resep);
+            $message = 'Resep ditambahkan ke favorite.';
+        }
+
+        return back()->with('success', $message);
     }
 }
