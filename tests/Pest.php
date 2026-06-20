@@ -1,5 +1,10 @@
 <?php
 
+use App\Models\Resep;
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -12,7 +17,7 @@
 */
 
 pest()->extend(Tests\TestCase::class)
-    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->use(RefreshDatabase::class)
     ->in('Feature');
 
 /*
@@ -32,16 +37,59 @@ expect()->extend('toBeOne', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Functions
+| Helper Functions
 |--------------------------------------------------------------------------
 |
-| While Pest is very powerful out-of-the-box, you may have some testing code specific to your
-| project that you don't want to repeat in every file. Here you can also expose helpers as
-| global functions to help you to reduce the number of lines of code in your test files.
+| Helper functions untuk mengurangi kode yang berulang dalam test.
+| Sesuaikan dengan struktur model di aplikasi Anda.
 |
 */
 
-function something()
+/**
+ * Membuat user biasa untuk testing
+ */
+function buatUserBiasa(): User
 {
-    // ..
+    return User::create([
+        'name' => 'User Test ' . uniqid(),
+        'email' => 'user' . uniqid() . '@test.com',
+        'password' => Hash::make('password123'),
+    ]);
+}
+
+/**
+ * Membuat user dengan email custom
+ */
+function buatUserDenganEmail(string $email): User
+{
+    return User::create([
+        'name' => ucfirst(explode('@', $email)[0]),
+        'email' => $email,
+        'password' => Hash::make('password123'),
+    ]);
+}
+
+/**
+ * Membuat resep untuk testing
+ */
+function buatResep(User $user = null, array $overrides = []): Resep
+{
+    $user ??= buatUserBiasa();
+
+    return Resep::factory()->create(array_merge([
+        'user_id' => $user->id,
+        'judul' => 'Resep Test',
+        'bahan' => 'Bahan test',
+        'langkah' => 'Langkah test',
+    ], $overrides));
+}
+
+/**
+ * Membuat beberapa resep sekaligus
+ */
+function buatBeberapaResep(int $count = 5, User $user = null): \Illuminate\Database\Eloquent\Collection
+{
+    $user ??= buatUserBiasa();
+
+    return Resep::factory()->count($count)->create(['user_id' => $user->id]);
 }
