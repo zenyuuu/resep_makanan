@@ -17,7 +17,7 @@ class ResepController extends Controller
         $reseps = Resep::with('user')->when($search, function ($query, $search) {
             return $query->where('judul', 'like', "%{$search}%")
                          ->orWhere('bahan', 'like', "%{$search}%");
-        })->paginate(12);
+        })->paginate(9);
 
         return view('reseps.index', compact('reseps'));
     }

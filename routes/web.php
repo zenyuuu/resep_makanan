@@ -11,6 +11,10 @@ Route::get('/', function () : View {
     return view('welcome', compact('latestRecipes'));
 })->name('home');
 
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok']);
+})->name('health');
+
 Route::get('/home', function () : View {
     $latestRecipes = Resep::with('user')->latest()->take(6)->get();
     return view('home', compact('latestRecipes'));
@@ -26,9 +30,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('reseps', App\Http\Controllers\ResepController::class);
-Route::post('/reseps/{resep}/favorite', [App\Http\Controllers\ResepController::class, 'favorite'])->name('reseps.favorite')->middleware('auth');
 Route::get('/reseps', [ResepController::class, 'index'])->name('reseps.index');
+Route::get('/reseps/{resep}', [ResepController::class, 'show'])->name('reseps.show');
+
+// Protected routes - require auth
+Route::middleware('auth')->group(function () {
+    Route::get('/reseps/create', [ResepController::class, 'create'])->name('reseps.create');
+    Route::post('/reseps', [ResepController::class, 'store'])->name('reseps.store');
+    Route::get('/reseps/{resep}/edit', [ResepController::class, 'edit'])->name('reseps.edit');
+    Route::patch('/reseps/{resep}', [ResepController::class, 'update'])->name('reseps.update');
+    Route::put('/reseps/{resep}', [ResepController::class, 'update'])->name('reseps.update');
+    Route::delete('/reseps/{resep}', [ResepController::class, 'destroy'])->name('reseps.destroy');
+});
+
+Route::post('/reseps/{resep}/favorite', [App\Http\Controllers\ResepController::class, 'favorite'])->name('reseps.favorite')->middleware('auth');
 Route::get('/favorites', [ResepController::class, 'favorites'])->name('reseps.favorites')->middleware('auth');
 
 require __DIR__.'/auth.php';
