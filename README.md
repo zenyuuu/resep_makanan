@@ -318,7 +318,11 @@ MIT License - See LICENSE file for details
 
 ## 👥 Contributors
 
-- **mixxue** - Main Developer
+- ALDI
+- Maikel Jeremiah Tampa
+- Agus Permana
+- Wisnu Pradana
+- Cienly
 
 ---
 
